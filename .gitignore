@@ -1,0 +1,41 @@
+# Secrets — never commit
+.env
+*.env
+!.env.example
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Logs (scheduler.py rotates logs/scheduler.log at 5 MB -> scheduler.log.1, ...)
+logs/
+*.log
+*.log.*
+
+# Runtime data — append-only stores and caches stay local
+# (bids.jsonl is an audit log, not source; it survives locally across restarts)
+cache/*
+!cache/.gitkeep
+data/*.jsonl
+data/*.lock
+data/*.tmp
+
+# cptr workspace state (chat/task history — machine-specific)
+.cptr/
+
+# Editor / OS noise
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store

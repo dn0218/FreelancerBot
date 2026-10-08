@@ -1,0 +1,3 @@
+# Runtime directories (keep even when empty).
+# data/  -> bids.jsonl append-only store + bid-counters.json
+# cache/ -> github portfolio cache (24h TTL)

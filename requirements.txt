@@ -1,0 +1,27 @@
+# =============================================================================
+# FreelancerClaw runtime dependencies — deliberately minimal.
+#
+# Dependency decisions (locked in at Step 1 review, applied build-wide):
+#
+#  * Scheduler (Module 7): STDLIB ASYNCIO ONLY — no APScheduler.
+#      We need one fixed-interval loop (every SCAN_INTERVAL_MINUTES >= 15),
+#      not cron expressions or persistent job stores. APScheduler would pull
+#      in tzlocal/pytz and its own event-loop integration for zero benefit,
+#      and a smaller tree is easier to audit for a credential-holding tool.
+#
+#  * Telegram (Module 5): RAW requests to https://api.telegram.org — no
+#      python-telegram-bot. We use three Bot API calls (sendMessage with
+#      inline keyboard, editMessageText, getUpdates); a full async bot
+#      framework would want to own the event loop and bot lifecycle for
+#      no gain, and adds a large surface to keep updated.
+#
+#  * HTTP everywhere: requests (synchronous, battle-tested, sufficient for
+#      a single-user scanner; no aiohttp needed).
+# =============================================================================
+
+requests>=2.31.0
+
+# Only needed for standalone use (scheduler.py, freelancer_api.py --self,
+# test_offline.py) to auto-load a local .env file.
+# OpenWebUI Valves users do not need it.
+python-dotenv>=1.0.0

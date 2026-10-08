@@ -1,0 +1,2 @@
+# Runtime directories (keep even when empty).
+# cache/ -> github portfolio cache (24h TTL)
